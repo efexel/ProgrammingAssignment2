@@ -37,8 +37,8 @@ cacheSolve <- function(x, ...) {
 	retVal  <- x$getinverse()
 	## Did we get a cached value?
 	if (!is.null(retVal)){
-		# Yes 
-	    message("Using cached data.")
+		# Yes
+		message("Using cached data.")
 	} else {
 		# No, do the heavy lifting...
 		retVal <- solve(x$get(), ...)
