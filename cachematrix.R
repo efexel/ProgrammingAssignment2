@@ -21,10 +21,11 @@ makeCacheMatrix <- function(x = matrix()) {
 	getinverse  <- function() {
 		m
 	}
-	list(set = set, 
-	     get = get, 
-	     setinverse = setinverse, 
-	     getinverse = getinverse)
+	# Return a list of methods
+	return(list(set = set,
+	       get = get,
+	       setinverse = setinverse,
+	       getinverse = getinverse))
 }
 
 ## This function computes the inverse of the special "matrix" retValurned by
@@ -34,11 +35,16 @@ makeCacheMatrix <- function(x = matrix()) {
 cacheSolve <- function(x, ...) {
 	## return a matrix that is the inverse of 'x'
 	retVal  <- x$getinverse()
+	## Did we get a cached value?
 	if (!is.null(retVal)){
-	    message("getting cached data")
+		# Yes 
+	    message("Using cached data.")
 	} else {
+		# No, do the heavy lifting...
 		retVal <- solve(x$get(), ...)
 		x$setinverse(retVal)
 	}
+	# Return the result.  Sure the keyword 'return' is not needed, but it
+	# keeps me sane with I switch languages.
 	return(retVal)
 }
